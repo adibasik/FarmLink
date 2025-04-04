@@ -1,6 +1,6 @@
 # 🛡️ Auto Reconnector & TapeMouse
 
-![Mod Icon](https://github.com/adibasik/FarmLink/blob/main/src/client/resources/assets/farmlink/icon.png)
+![Mod Icon](https://github.com/adibasik/FarmLink/blob/main/src/client/resources/assets/farmlink/icon.png){: width="100"}
 
 **Автор: [adibasik]([https://github.com/Takaranoao](https://github.com/adibasik))**  
 Minecraft Fabric mod for version **1.20.4**
