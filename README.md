@@ -1,8 +1,8 @@
 # 🛡️ Auto Reconnector & TapeMouse
 
-![Mod Icon](https://raw.githubusercontent.com/Takaranoao/AutoReconnector-Fabric/main/assets/autoreconnector/icon.png)
+![Mod Icon](https://raw.githubusercontent.com/adibasik/FarmLink/main/assets/autoreconnector/icon.png)
 
-**Автор: [Adibasik](https://github.com/Takaranoao)**  
+**Автор: [adibasik]([https://github.com/Takaranoao](https://github.com/adibasik))**  
 Minecraft Fabric mod for version **1.20.4**
 
 ---
