@@ -49,3 +49,12 @@ Press `Right Shift` in-game to open the configuration screen:
 3. Done!
 
 ---
+
+## 🛡️ License / Лицензия
+
+FarmLink is licensed under the GNU General Public License v3.0 or later (GPL-3.0-or-later).  
+You are free to use, modify, and distribute this mod under the terms of this license.
+
+FarmLink распространяется под лицензией GNU GPLv3 или выше.  
+Вы можете использовать, изменять и распространять мод в соответствии с условиями лицензии.
+
