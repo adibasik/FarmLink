@@ -9,7 +9,7 @@ Minecraft Fabric mod for version **1.20.4**
 
 ## 🌍 English
 
-**Auto Reconnector & TapeMouse** is a client-side mod that:
+**FarmLink** is a client-side mod that:
 
 - ⏱️ Automatically reconnects you to the server after being disconnected.
 - 🐁 Simulates automatic attack clicks (TapeMouse) — great for AFK mob farms.
@@ -22,7 +22,7 @@ Minecraft Fabric mod for version **1.20.4**
 
 ## 🇷🇺 Русский
 
-**Auto Reconnector & TapeMouse** — это мод для клиента Minecraft, который:
+**FarmLink** — это мод для клиента Minecraft, который:
 
 - 🔁 Автоматически переподключается к серверу после дисконнекта.
 - 🖱️ Имитирует клики мыши (TapeMouse) — идеально для AFK фармилок мобов.
@@ -47,12 +47,5 @@ Press `Right Shift` in-game to open the configuration screen:
 1. Download Fabric Loader 1.20.4
 2. Put the mod `.jar` in your `mods` folder
 3. Done!
-
----
-
-## 📎 License
-
-This mod is MIT licensed.  
-Use it, remix it, share it — just credit **Adibasik**. ✌️
 
 ---
