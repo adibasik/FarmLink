@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "me.adibasik.mixins",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "MixinScreen",
+    "MixinDisconnectedScreen",
+    "MixinInGameOverlayRenderer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
