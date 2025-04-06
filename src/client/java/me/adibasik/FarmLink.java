@@ -11,6 +11,7 @@ import net.minecraft.client.gui.screen.multiplayer.ConnectScreen;
 import net.minecraft.client.network.ServerAddress;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.slot.SlotActionType;
@@ -29,7 +30,8 @@ public class FarmLink implements ClientModInitializer {
     private boolean wasCompassInHand = false;
 public static boolean autojoin = true;
     // Счётчик для TapeMouse
-    private int tapeMouseTickCounter = 0;
+    private int i = 0;
+    public static int delay = 20;
     // Задержка (offset) перед выполнением удара в тиках
     private int pendingHitDelay = 0;
     private static final int HIT_OFFSET = 5; // Задержка в 5 тиков (можно изменить)
@@ -96,22 +98,15 @@ public static boolean autojoin = true;
         }
 
         // TapeMouse логика с задержкой удара (offset)
-        if (tapemouseEnabled && mc.player != null) {
-            // Если уже запланирован удар, ждем offset
-            if (pendingHitDelay > 0) {
-                pendingHitDelay--;
-                if (pendingHitDelay == 0) {
-                    performAttack(mc);
-                }
-            } else {
-                tapeMouseTickCounter++;
-                if (tapeMouseTickCounter >= 20) {
-                    tapeMouseTickCounter = 0;
-                    // Устанавливаем задержку перед атакой
-                    pendingHitDelay = HIT_OFFSET;
-                }
-            }
+        if (tapemouseEnabled && i++ >= delay) {
+            i = 0;
+            KeyBinding attackKey = mc.options.attackKey;
+            // Имитируем нажатие левой кнопки атаки
+            attackKey.setPressed(true);
+            KeyBinding.onKeyPressed(attackKey.getDefaultKey());
+            mc.execute(() -> attackKey.setPressed(false));
         }
+
 
         // Оригинальный код для автореконнекта
         if (mc.world != null && mc.getCurrentServerEntry() != null) {
@@ -130,15 +125,7 @@ public static boolean autojoin = true;
         }
     }
 
-    private void performAttack(MinecraftClient mc) {
-        KeyBinding attackKey = mc.options.attackKey;
-        // Имитируем нажатие левой кнопки атаки
-        attackKey.setPressed(true);
-        KeyBinding.onKeyPressed(attackKey.getDefaultKey());
-        mc.player.swingHand(Hand.MAIN_HAND);
-        // Сбрасываем состояние через 1 тик
-        mc.execute(() -> attackKey.setPressed(false));
-    }
+
 
     @Override
     public void onInitializeClient() {
