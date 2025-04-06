@@ -15,6 +15,7 @@ public class FarmLinkScreen extends Screen {
 
     private TextFieldWidget slot2Field;
     private TextFieldWidget delayField;
+    private TextFieldWidget tapemouseDelayField;
     private ButtonWidget applyButton;
     private ButtonWidget tapemouseToggleButton;
     private ButtonWidget autojoinToggleButton;
@@ -23,8 +24,6 @@ public class FarmLinkScreen extends Screen {
     private static final Map<String, int[]> SLOT_RANGES = new HashMap<>();
     private static final int TEXT_COLOR = 0xFFFFFF;
     private static final int SUBTEXT_COLOR = 0xA0A0A0;
-    private static final int HIGHLIGHT_COLOR = 0x55FF55;
-    private static final int ERROR_COLOR = 0xFF5555;
     private static final int BACKGROUND_COLOR = 0x6B000000;
 
     protected FarmLinkScreen() {
@@ -46,13 +45,20 @@ public class FarmLinkScreen extends Screen {
         // Delay field
         delayField = new TextFieldWidget(textRenderer, centerX - 100, y + 40, 200, 20,
                 Text.of("Delay (ms)").copy().formatted(Formatting.GRAY));
-        delayField.setMaxLength(5);
+        delayField.setMaxLength(4);
         delayField.setText(String.valueOf(FarmLink.delayMs));
         addDrawableChild(delayField);
 
+        // Tapemouse delay field
+        tapemouseDelayField = new TextFieldWidget(textRenderer, centerX - 100, y + 80, 200, 20,
+                Text.of("Tapemouse Delay (ms)").copy().formatted(Formatting.GRAY));
+        tapemouseDelayField.setMaxLength(3);
+        tapemouseDelayField.setText(String.valueOf(FarmLink.delay));
+        addDrawableChild(tapemouseDelayField);
+
         // Apply button
         applyButton = ButtonWidget.builder(Text.of("Apply").copy().formatted(Formatting.GREEN), button -> applySettings())
-                .dimensions(centerX - 100, y + 80, 200, 20)
+                .dimensions(centerX - 100, y + 120, 200, 20)
                 .build();
         addDrawableChild(applyButton);
 
@@ -60,26 +66,26 @@ public class FarmLinkScreen extends Screen {
         tapemouseToggleButton = ButtonWidget.builder(getTapemouseLabel(), button -> {
             FarmLink.tapemouseEnabled = !FarmLink.tapemouseEnabled;
             button.setMessage(getTapemouseLabel());
-        }).dimensions(centerX - 100, y + 110, 200, 20).build();
+        }).dimensions(centerX - 100, y + 150, 200, 20).build();
         addDrawableChild(tapemouseToggleButton);
 
         // Autojoin toggle
         autojoinToggleButton = ButtonWidget.builder(getAutojoinLabel(), button -> {
             FarmLink.autojoin = !FarmLink.autojoin;
             button.setMessage(getAutojoinLabel());
-        }).dimensions(centerX - 100, y + 140, 200, 20).build();
+        }).dimensions(centerX - 100, y + 180, 200, 20).build();
         addDrawableChild(autojoinToggleButton);
 
-        // No fire overlay toggle
+        // No Fire Overlay toggle
         noFireOverlayToggleButton = ButtonWidget.builder(getNoFireOverlayLabel(), button -> {
             FarmLink.noFireOverlay = !FarmLink.noFireOverlay;
             button.setMessage(getNoFireOverlayLabel());
-        }).dimensions(centerX - 100, y + 170, 200, 20).build();
+        }).dimensions(centerX - 100, y + 210, 200, 20).build();
         addDrawableChild(noFireOverlayToggleButton);
 
         // Close button
         addDrawableChild(ButtonWidget.builder(Text.of("Close").copy().formatted(Formatting.RED), button -> close())
-                .dimensions(centerX - 100, y + 200, 200, 20)
+                .dimensions(centerX - 100, y + 240, 200, 20)
                 .build());
     }
 
@@ -88,6 +94,7 @@ public class FarmLinkScreen extends Screen {
             int grifSlot = Integer.parseInt(slot2Field.getText());
             FarmLink.COMPASS_SLOT_INDEX2 = convertGrifToSlot(grifSlot);
             FarmLink.delayMs = Integer.parseInt(delayField.getText());
+            FarmLink.delay = Integer.parseInt(tapemouseDelayField.getText());
             MinecraftClient.getInstance().setScreen(null);
         } catch (NumberFormatException e) {
             applyButton.setMessage(Text.of("Invalid input!").copy().formatted(Formatting.RED));
@@ -132,7 +139,7 @@ public class FarmLinkScreen extends Screen {
         int centerX = this.width / 2;
         int y = this.height / 4;
 
-        context.fill(centerX - 110, y - 40, centerX + 110, y + 240, BACKGROUND_COLOR);
+        context.fill(centerX - 110, y - 40, centerX + 110, y + 280, BACKGROUND_COLOR);
 
         context.drawCenteredTextWithShadow(textRenderer,
                 Text.of("Auto Reconnector").copy().formatted(Formatting.BOLD, Formatting.GOLD),
@@ -145,6 +152,10 @@ public class FarmLinkScreen extends Screen {
         context.drawTextWithShadow(textRenderer,
                 Text.of("Action Delay (ms)").copy().formatted(Formatting.YELLOW),
                 centerX - 100, delayField.getY() - 12, SUBTEXT_COLOR);
+
+        context.drawTextWithShadow(textRenderer,
+                Text.of("Tapemouse Delay (ms)").copy().formatted(Formatting.YELLOW),
+                centerX - 100, tapemouseDelayField.getY() - 12, SUBTEXT_COLOR);
 
         super.render(context, mouseX, mouseY, delta);
     }
